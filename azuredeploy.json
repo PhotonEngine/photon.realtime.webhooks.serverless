@@ -1,0 +1,202 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "Storage Account type"
+      }
+    },
+    "Application_Insight_Name": {
+      "defaultValue": null,
+      "type": "String"
+    },
+    "NotificationHub_Namesapce": {
+      "defaultValue": null,
+      "type": "String"
+
+    },
+    "storageAccounts_name": {
+      "defaultValue": null,
+      "type": "String"
+    },
+    "WebAppPlan_Name": {
+      "defaultValue": null,
+      "type": "String"
+    },
+    "WebApp_Name": {
+      "defaultValue": null,
+      "type": "String"
+    },
+    "NotificationHub_Name": {
+      "defaultValue": "null",
+      "type": "String"
+    }
+  },
+  "variables": {
+    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', parameters('storageAccounts_name'))]"
+  },
+  "resources": [
+    {
+      "type": "microsoft.insights/components",
+      "kind": "web",
+      "name": "[parameters('Application_Insight_Name')]",
+      "apiVersion": "2014-04-01",
+      "location": "North Europe",
+      "tags": {
+      },
+      "properties": {
+        "ApplicationId": "[parameters('Application_Insight_Name')]"
+      },
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.NotificationHubs/namespaces",
+      "sku": {
+        "name": "Free"
+      },
+      "kind": "NotificationHub",
+      "name": "[parameters('NotificationHub_Namesapce')]",
+      "apiVersion": "2014-09-01",
+      "location": "North Europe",
+      "tags": {},
+      "properties": {
+        "namespaceType": "NotificationHub"
+      },
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageAccounts_name')]",
+      "apiVersion": "2015-06-15",
+      "location": "North Europe",
+      "properties": {
+        "accountType": "[parameters('storageAccountType')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      },
+      "kind": "app",
+      "name": "[parameters('WebAppPlan_Name')]",
+      "apiVersion": "2015-08-01",
+      "location": "North Europe",
+      "properties": {
+        "name": "[parameters('WebAppPlan_Name')]",
+        "numberOfWorkers": 1
+      },
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.NotificationHubs/namespaces/notificationHubs",
+      "name": "[concat(parameters('NotificationHub_Namesapce'), '/' ,parameters('NotificationHub_Name'))]",
+      "apiVersion": "2014-09-01",
+      "location": "North Europe",
+      "properties": {
+        "authorizationRules": []
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('NotificationHub_Namesapce'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "functionApp",
+      "name": "[parameters('WebApp_Name')]",
+      "apiVersion": "2015-08-01",
+      "location": "North Europe",
+      "properties": {
+        "name": "[parameters('WebApp_Name')]",
+        "hostNames": [
+          "exitgameswebhooks.azurewebsites.net"
+        ],
+        "enabledHostNames": [
+          "exitgameswebhooks.azurewebsites.net",
+          "exitgameswebhooks.scm.azurewebsites.net"
+        ],
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('WebApp_Name'),'exitgameswebhooks.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          },
+          {
+            "name": "[concat(parameters('WebApp_Name'),'exitgameswebhooks.scm.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('WebAppPlan_Name'))]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AzureWebJobsDashboard",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "WEBSITE_CONTENTSHARE",
+              "value": "[toLower(parameters('WebApp_Name'))]"
+            },
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "latest"
+            },
+            {
+              "name": "WEBSITE_NODE_DEFAULT_VERSION",
+              "value": "6.5.0"
+            }
+          ],
+          "connectionStrings":
+            [
+              {
+                "name": "AzureBlob",
+                "connectionString": "[Concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccounts_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_name')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
+              }
+            ]
+        }
+      },
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('WebApp_Name'))]"
+          ],
+          "properties": {
+            "RepoUrl": "https://github.com/PhotonEngine/photon.realtime.webhooks.serverless",
+            "branch": "master",
+            "IsManualIntegration": true
+          }
+        }
+      ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('WebAppPlan_Name'))]"
+      ]
+    }
+  ]
+}
