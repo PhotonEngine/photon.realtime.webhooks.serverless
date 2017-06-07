@@ -1,0 +1,137 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ExitGames",
+		"_postman_id": "1600307c-d5c4-53ce-2ae8-8b5b7c3d3fef",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GameClose-Local",
+			"request": {
+				"url": "localhost:6523/helloworld/GameClose",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorCount\": 2,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"GameId\": \"MyRoom\",\r\n    \"Region\": \"EU\",\r\n    \"State\": {\r\n        \"ActorCounter\": 3,\r\n        \"ActorList\": [\r\n            {\r\n                \"ActorNr\": 1,\r\n                \"UserId\": \"MyUserId1\",\r\n                \"NickName\": \"MyPlayer1\",\r\n                \"Binary\": \"RGIAAAEBRAAAAAJzAAlw...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer1\",\r\n                        \"player_id\": \"12345\"\r\n                    }\r\n                }\r\n            },\r\n            {\r\n                \"ActorNr\": 3,\r\n                \"UserId\": \"MyUserId0\",\r\n                \"NickName\": \"MyPlayer0\",\r\n                \"Binary\": \"RGIAAAEBRAAAAAFi/3MA...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer0\"\r\n                    }\r\n                }\r\n            }\r\n        ],\r\n        \"Binary\": {\r\n            \"18\": \"RAAAAAdzAAhwcm9wMUtl...\",\r\n            \"19\": \"RGl6AAEAAAAAAAN6AANp...\"\r\n        },\r\n        \"CheckUserOnJoin\": true,\r\n        \"CustomProperties\": {\r\n            \"lobby4Key\": \"test1b\",\r\n            \"lobby3Key\": \"test1a\"\r\n        },\r\n        \"DeleteCacheOnLeave\": false,\r\n        \"EmptyRoomTTL\": 0,\r\n        \"IsOpen\": true,\r\n        \"IsVisible\": true,\r\n        \"LobbyType\": 0,\r\n        \"LobbyProperties\": [\r\n            \"lobby3Key\",\r\n            \"lobby4Key\"\r\n        ],\r\n        \"MaxPlayers\": 4,\r\n        \"PlayerTTL\": 2147483647,\r\n        \"SuppressRoomEvents\": false,\r\n        \"Slice\": 0,\r\n        \"DebugInfo\": {\r\n            \"DEBUG_PROPERTIES_18\": {\r\n                \"250\": [\r\n                    \"lobby3Key\",\r\n                    \"lobby4Key\"\r\n                ],\r\n                \"prop1Key\": \"prop1Val\",\r\n                \"prop2Key\": \"prop2Val\",\r\n                \"lobby4Key\": \"test1b\",\r\n                \"lobby3Key\": \"test1a\",\r\n                \"map_name\": \"mymap\",\r\n                \"turn\": 1\r\n            },\r\n            \"DEBUG_EVENTS_19\": {\r\n                \"0\": [\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ]\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"Type\": \"Save\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GameCreate-Local",
+			"request": {
+				"url": "localhost:7071/api/hello-world-sandy/GameCreate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "//appId",
+						"value": "helloworld1",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorNr\": 3,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"Data\": \"data\",\r\n    \"GameId\": \"MyRoom\",\r\n    \"Region\": \"EU\",\r\n    \"State\": {\r\n        \"ActorCounter\": 3,\r\n        \"ActorList\": [\r\n            {\r\n                \"ActorNr\": 1,\r\n                \"UserId\": \"MyUserId1\",\r\n                \"NickName\": \"MyPlayer1\",\r\n                \"Binary\": \"RGIAAAEBRAAAAAJzAAlw...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer1\",\r\n                        \"player_id\": \"12345\"\r\n                    }\r\n                }\r\n            },\r\n            {\r\n                \"ActorNr\": 3,\r\n                \"UserId\": \"MyUserId0\",\r\n                \"NickName\": \"MyPlayer0\",\r\n                \"IsActive\": true,\r\n                \"Binary\": \"RGIAAAEBRAAAAAFi/3MAC...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer0\"\r\n                    }\r\n                }\r\n            }\r\n        ],\r\n        \"Binary\": {\r\n            \"18\": \"RAAAAAdzAAhwcm9wMUtl...\",\r\n            \"19\": \"RGl6AAEAAAAAAAN6AANp...\"\r\n        },\r\n        \"CheckUserOnJoin\": true,\r\n        \"CustomProperties\": {\r\n            \"lobby4Key\": \"test1b\",\r\n            \"lobby3Key\": \"test1a\"\r\n        },\r\n        \"DeleteCacheOnLeave\": false,\r\n        \"EmptyRoomTTL\": 0,\r\n        \"IsOpen\": true,\r\n        \"IsVisible\": true,\r\n        \"LobbyType\": 0,\r\n        \"LobbyProperties\": [\r\n            \"lobby3Key\",\r\n            \"lobby4Key\"\r\n        ],\r\n        \"MaxPlayers\": 4,\r\n        \"PlayerTTL\": 2147483647,\r\n        \"SuppressRoomEvents\": false,\r\n        \"Slice\": 0,\r\n        \"DebugInfo\": {\r\n            \"DEBUG_PROPERTIES_18\": {\r\n                \"250\": [\r\n                    \"lobby3Key\",\r\n                    \"lobby4Key\"\r\n                ],\r\n                \"prop1Key\": \"prop1Val\",\r\n                \"prop2Key\": \"prop2Val\",\r\n                \"lobby4Key\": \"test1b\",\r\n                \"lobby3Key\": \"test1a\",\r\n                \"map_name\": \"mymap\",\r\n                \"turn\": 1\r\n            },\r\n            \"DEBUG_EVENTS_19\": {\r\n                \"0\": [\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ]\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"Type\": \"Event\",\r\n    \"UserId\": \"MyUserId0\",\r\n    \"NickName\": \"MyPlayer0\",\r\n    \"EvCode\": 0\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GameEvent-Local",
+			"request": {
+				"url": "localhost:7071/api/hello-world-sandy/GameEvent",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorNr\": 3,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"Data\": \"data\",\r\n    \"GameId\": \"MyRoom\",\r\n    \"Region\": \"EU\",\r\n    \"State\": {\r\n        \"ActorCounter\": 3,\r\n        \"ActorList\": [\r\n            {\r\n                \"ActorNr\": 1,\r\n                \"UserId\": \"MyUserId1\",\r\n                \"NickName\": \"MyPlayer1\",\r\n                \"Binary\": \"RGIAAAEBRAAAAAJzAAlw...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer1\",\r\n                        \"player_id\": \"12345\"\r\n                    }\r\n                }\r\n            },\r\n            {\r\n                \"ActorNr\": 3,\r\n                \"UserId\": \"MyUserId0\",\r\n                \"NickName\": \"MyPlayer0\",\r\n                \"IsActive\": true,\r\n                \"Binary\": \"RGIAAAEBRAAAAAFi/3MAC...\",\r\n                \"DEBUG_BINARY\": {\r\n                    \"1\": {\r\n                        \"255\": \"MyPlayer0\"\r\n                    }\r\n                }\r\n            }\r\n        ],\r\n        \"Binary\": {\r\n            \"18\": \"RAAAAAdzAAhwcm9wMUtl...\",\r\n            \"19\": \"RGl6AAEAAAAAAAN6AANp...\"\r\n        },\r\n        \"CheckUserOnJoin\": true,\r\n        \"CustomProperties\": {\r\n            \"lobby4Key\": \"test1b\",\r\n            \"lobby3Key\": \"test1a\"\r\n        },\r\n        \"DeleteCacheOnLeave\": false,\r\n        \"EmptyRoomTTL\": 0,\r\n        \"IsOpen\": true,\r\n        \"IsVisible\": true,\r\n        \"LobbyType\": 0,\r\n        \"LobbyProperties\": [\r\n            \"lobby3Key\",\r\n            \"lobby4Key\"\r\n        ],\r\n        \"MaxPlayers\": 4,\r\n        \"PlayerTTL\": 2147483647,\r\n        \"SuppressRoomEvents\": false,\r\n        \"Slice\": 0,\r\n        \"DebugInfo\": {\r\n            \"DEBUG_PROPERTIES_18\": {\r\n                \"250\": [\r\n                    \"lobby3Key\",\r\n                    \"lobby4Key\"\r\n                ],\r\n                \"prop1Key\": \"prop1Val\",\r\n                \"prop2Key\": \"prop2Val\",\r\n                \"lobby4Key\": \"test1b\",\r\n                \"lobby3Key\": \"test1a\",\r\n                \"map_name\": \"mymap\",\r\n                \"turn\": 1\r\n            },\r\n            \"DEBUG_EVENTS_19\": {\r\n                \"0\": [\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ],\r\n                    [\r\n                        3,\r\n                        0,\r\n                        \"data\"\r\n                    ]\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"Type\": \"Event\",\r\n    \"UserId\": \"MyUserId0\",\r\n    \"NickName\": \"MyPlayer0\",\r\n    \"EvCode\": 0\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GameJoin-Local",
+			"request": {
+				"url": "localhost:7071/api/hello-world-sandy/GameJoin",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorNr\": 2,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"GameId\": \"MyRoom\",\r\n    \"Region\": \"EU\",\r\n    \"Type\": \"Join\",\r\n    \"UserId\": \"MyUserId0\",\r\n    \"NickName\": \"MyPlayer0\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GameLeave-Local",
+			"request": {
+				"url": "localhost:7071/api/hello-world-sandy/GameLeave",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorNr\": 1,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"GameId\": \"MyRoom\",\r\n    \"IsInactive\": false,\r\n    \"Reason\": \"0\",\r\n    \"Region\": \"EU\",\r\n    \"Type\": \"ClientDisconnect\",\r\n    \"UserId\": \"MyUserId1\",\r\n    \"NickName\": \"MyPlayer1\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GameProperties-Local",
+			"request": {
+				"url": "localhost:7071/api/hello-world-sandy/GameProperties",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ActorNr\": 1,\r\n    \"AppVersion\": \"client-x.y.z\",\r\n    \"AppId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"CreateOptions\": {\r\n        \"MaxPlayers\": 4,\r\n        \"LobbyId\": null,\r\n        \"LobbyType\": 0,\r\n        \"CustomProperties\": {\r\n            \"lobby3Key\": \"lobby3Val\",\r\n            \"lobby4Key\": \"lobby4Val\"\r\n        },\r\n        \"EmptyRoomTTL\": 0,\r\n        \"PlayerTTL\": 2147483647,\r\n        \"CheckUserOnJoin\": true,\r\n        \"DeleteCacheOnLeave\": false,\r\n        \"SuppressRoomEvents\": false\r\n    },\r\n    \"GameId\": \"MyRoom\",\r\n    \"Region\": \"EU\",\r\n    \"Type\": \"Create\",\r\n    \"UserId\": \"MyUserId1\",\r\n    \"NickName\": \"MyPlayer1\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
